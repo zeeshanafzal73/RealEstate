@@ -110,8 +110,8 @@ export const LatestNews = () => {
                           </h2>
                         </div>
                         <div className="card-body-a">
-                          <div class="card-date">
-                            <span class="date-b text-white">
+                          <div className="card-date">
+                            <span className="date-b text-white">
                               {property.date}
                             </span>
                           </div>

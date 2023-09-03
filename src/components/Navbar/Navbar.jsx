@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import "./Navbar.css";
-import "./../Static/CssFiles/animate.min.css";
 import { Link } from "react-router-dom";
-// import "./../Static/CssFiles/bootstrap.min.css";
-
+import { Search } from "../Search";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export default class Navbar extends Component {
+  state = {
+    isSearchVisible: false,
+  };
+
+  toggleSearch = () => {
+    this.setState({ isSearchVisible: !this.state.isSearchVisible });
+  };
   render() {
     return (
       <>
@@ -33,7 +39,7 @@ export default class Navbar extends Component {
             >
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link active">
+                  <Link to="/home" className="nav-link active">
                     Home
                   </Link>
                 </li>
@@ -51,7 +57,7 @@ export default class Navbar extends Component {
                 </li>
 
                 <li className="nav-item">
-                  <Link className="nav-link " to="/blog">
+                  <Link className="nav-link " to="/blogs">
                     Blog
                   </Link>
                 </li>
@@ -95,12 +101,19 @@ export default class Navbar extends Component {
             <button
               type="button"
               className="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarTogglerDemo01"
+              onClick={this.toggleSearch}
             >
-              <i className="bi bi-search"></i>
+              <FontAwesomeIcon icon={faSearch} />
             </button>
+            {this.state.isSearchVisible && <Search />}  
           </div>
+          <ul>
+              <div className="nav-item">
+              <Link className="nav-link " to="" onClick={this.props.onLogout}>
+                Logout
+              </Link>
+            </div>
+            </ul>
         </nav>
       </>
     );

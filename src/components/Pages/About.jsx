@@ -1,7 +1,8 @@
 import React from "react";
-// import './../Navbar/Navbar.css'
 import pic from "./../Static/img/slide-about-1.jpg";
+import pic1 from "./../Static/img/about-2.jpg";
 import { Link } from "react-router-dom";
+import { Team } from "../Team";
 export const About = () => {
   return (
     <>
@@ -23,7 +24,7 @@ export const About = () => {
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <Link
-                      to="/"
+                      to="/home"
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       Home
@@ -58,7 +59,7 @@ export const About = () => {
               <div className="row">
                 <div className="col-md-6 col-lg-5">
                   <img
-                    src="assets/img/about-2.jpg"
+                    src={pic1}
                     alt=""
                     className="img-fluid"
                   />
@@ -92,11 +93,26 @@ export const About = () => {
                     lacinia eget consectetur sed, convallis at tellus.
                   </p>
                 </div>
-              </div>
+              </div>   
             </div>
           </div>
         </div>
       </section>
+      <section class="section-agents section-t8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="title-wrap d-flex justify-content-between">
+              <div class="title-box">
+                <h2 class="title-a">Meet Our Team</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <Team/>
+        </section>
+    
     </>
   );
 };
