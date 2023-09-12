@@ -136,6 +136,7 @@ export const LatestProperties = () => {
           activeIndex={index}
           onSelect={handleSelect}
           interval={3000}
+          pause = {false}
         >
           {groupedPropertyData.map((group, groupIndex) => (
             <Carousel.Item key={groupIndex}>

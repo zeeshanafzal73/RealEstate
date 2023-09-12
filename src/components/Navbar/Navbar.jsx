@@ -109,7 +109,7 @@ export default class Navbar extends Component {
           </div>
           <ul>
               <div className="nav-item">
-              <Link className="nav-link " to="" onClick={this.props.onLogout}>
+              <Link className="nav-link " to="/" onClick={this.props.onLogout}>
                 Logout
               </Link>
             </div>

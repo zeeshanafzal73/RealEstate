@@ -13,7 +13,6 @@ import { Login } from "./components/Pages/Login";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    // Initialize the state with isLoggedIn set to false
     this.state = {
       isLoggedIn: false,
     };
@@ -21,13 +20,16 @@ export default class App extends Component {
 
   // Function to handle login
   handleLogin = () => {
-    // Set isLoggedIn to true when the user logs in
     this.setState({ isLoggedIn: true });
   };
 
   // Function to handle logout
   handleLogout = () => {
-    // Set isLoggedIn to false when the user logs out
+   
+      alert('Logged-out');
+    
+    
+    localStorage.removeItem("token");
     this.setState({ isLoggedIn: false });
   };
 
@@ -37,21 +39,24 @@ export default class App extends Component {
     return (
       <>
         <Router>
-          {/* Conditionally render the Login component if not logged in */}
-          {!isLoggedIn && <Login onLogin={this.handleLogin} />}
-          {isLoggedIn && (
-            <Navbar onLogout={this.handleLogout} />
-          )}
+          {isLoggedIn && <Navbar onLogout={this.handleLogout} />}
           <Routes>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/home" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <Login
+                  onLogin={this.handleLogin}
+                  isLoggedIn={isLoggedIn} // Pass the isLoggedIn state to the Login component
+                />
+              }
+            />
+            {isLoggedIn && <Route path="/home" element={<Home />} />}
             <Route path="/about" element={<About />} />
             <Route path="/property" element={<Property />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/search" element={<Search />} />
           </Routes>
-          {/* Conditionally render the Footer */}
           {isLoggedIn && <Footer />}
         </Router>
       </>
