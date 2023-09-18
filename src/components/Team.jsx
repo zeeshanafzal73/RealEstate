@@ -1,50 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import property1 from "./Static/img/agent-4.jpg";
-import property2 from "./Static/img/agent-5.jpg";
-import property3 from "./Static/img/agent-6.jpg";
-
-
-
-const agentData = [
-  {
-    imageSrc: property1,
-    title: "Margaret Sotillo",
-    description:
-      "Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two",
-    phone: "+54 356 945234",
-    email: "agents@example.com",
-  },
-  {
-    imageSrc: property2,
-    title: "Margaret Sotillo",
-    description:
-      "Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two",
-    phone: "+54 356 945234",
-    email: "agents@example.com",
-  },
-  {
-    imageSrc: property3,
-    title: "Margaret Sotillo",
-    description:
-      "Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two",
-    phone: "+54 356 945234",
-    email: "agents@example.com",
-  },
-];
+import axios from "axios";
 
 export const Team = () => {
+  const [agentData, setAgentData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/team/")
+      .then((res) => {
+        setAgentData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Container>
       <Row>
         <Col md={12}>
           <div className="title-wrap d-flex justify-content-between">
+          <div className="title-box">
+              <h2 className="title-a">Team Members</h2>
+            </div>
             <div className="title-link">
               <a href="agents-grid.html">
-              <strong>All Team Members </strong>  
-              <FontAwesomeIcon icon={faChevronRight}/>
+                <strong>All Team Members </strong>
+                <FontAwesomeIcon icon={faChevronRight} />
               </a>
             </div>
           </div>

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { Home } from "./components/Pages/Home";
 import { Footer } from "./components/Footer";
 import { About } from "./components/Pages/About";
@@ -15,7 +20,7 @@ export default function App() {
 
   // Function to handle login
   const handleLogin = () => {
-    setIsLoggedIn(localStorage.getItem('token'));
+    setIsLoggedIn(localStorage.getItem("token"));
   };
 
   // Function to handle logout
@@ -26,7 +31,7 @@ export default function App() {
 
   // Use useEffect to check token status when the app loads
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     setIsLoggedIn(token);
   }, []);
 
@@ -36,14 +41,20 @@ export default function App() {
       <Routes>
         <Route
           path="/"
-          element={isLoggedIn ? <Navigate to="/home" /> : <Login onLogin={handleLogin} />}
+          element={
+            isLoggedIn ? (
+              <Navigate to="/home" />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
         />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/property" element={<Property />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/search" element={<Search />} />
+        {isLoggedIn && <Route path="/home" element={<Home />} />}
+        {isLoggedIn && <Route path="/about" element={<About />} />}
+        {isLoggedIn && <Route path="/property" element={<Property />} />}
+        {isLoggedIn && <Route path="/blogs" element={<Blogs />} />}
+        {isLoggedIn && <Route path="/contact" element={<Contact />} />}
+        {isLoggedIn && <Route path="/search" element={<Search />} />}
       </Routes>
       {isLoggedIn && <Footer />}
     </Router>

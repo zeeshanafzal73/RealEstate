@@ -3,7 +3,12 @@ import pic from "./../Static/img/slide-about-1.jpg";
 import pic1 from "./../Static/img/about-2.jpg";
 import { Link } from "react-router-dom";
 import { Team } from "../Team";
+
+
+
+
 export const About = () => {
+
   return (
     <>
       <section className="intro-single">

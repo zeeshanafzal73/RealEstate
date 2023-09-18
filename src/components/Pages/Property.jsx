@@ -1,118 +1,34 @@
-import React from "react";
+import axios from "axios";
+import React, {useState,useEffect} from "react";
 import {
   Container,
   Row,
   Col,
   Form,
 } from "react-bootstrap";
-import property1 from "./../Static/img/property-1.jpg";
-import property2 from "./../Static/img/property-2.jpg";
-import property3 from "./../Static/img/property-3.jpg";
-import property4 from "./../Static/img/property-4.jpg";
-import property5 from "./../Static/img/property-5.jpg";
-import property6 from "./../Static/img/property-6.jpg";
-import property7 from "./../Static/img/property-7.jpg";
-import property8 from "./../Static/img/property-8.jpg";
-import property9 from "./../Static/img/property-9.jpg";
-import property10 from "./../Static/img/property-10.jpg";
 import { Link } from "react-router-dom";
 
-const propertyData = [
-  {
-    imageSrc: property1,
-    title: "206 Mount Olive Road Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property2,
-    title: "157 West Central Park",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property3,
-    title: "245 Azabu Nishi Park let",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property4,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property5,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property6,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property7,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property8,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property9,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-  {
-    imageSrc: property10,
-    title: "204 Montal South Bela Two",
-    price: "rent | $ 12.000",
-    area: "340m²",
-    beds: "2",
-    baths: "4",
-    garages: "1",
-  },
-];
+
+
 export const Property = () => {
+  const [propertyData, setPropertyData]= useState([])
+
+useEffect(()=>{
+  const fetch = async ()=>{
+    try{ 
+      const res = await axios.get('http://127.0.0.1:8000/property/')
+      setPropertyData(res.data) 
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+fetch()  
+},[])
+ 
   return (
     <>
-      <section className="intro-single">
+      <section className="intro-single" style={{marginTop :'-5rem'}}>
         <Container>
           <Row>
             <Col md={8}>
@@ -161,7 +77,7 @@ export const Property = () => {
                 <div className="card-box-a card-shadow">
                   <div className="img-box-a">
                     <img
-                      src={property.imageSrc}
+                      src={property.image}
                       alt=""
                       className="img-a img-fluid"
                     />
@@ -176,6 +92,9 @@ export const Property = () => {
                       <div className="card-body-a">
                         <div className="price-box d-flex">
                           <span className="price-a">{property.price}</span>
+                        </div>
+                        <div className="price-box d-flex">
+                          <span className="price-a">{property.category}</span>
                         </div>
                         <a href="#" className="link-a">
                           Click here to view

@@ -1,59 +1,31 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
-import property1 from "./../Static/img/post-1.jpg";
-import property2 from "./../Static/img/post-2.jpg";
-import property3 from "./../Static/img/post-3.jpg";
-import property4 from "./../Static/img/post-4.jpg";
-import property5 from "./../Static/img/post-5.jpg";
-import property6 from "./../Static/img/post-6.jpg";
-import property7 from "./../Static/img/post-7.jpg";
+import axios from "axios";
 
-const propertyData = [
-  {
-    imageSrc: property1,
-    title: "206 Mount Olive Road Two",
-    date: "18 September 2023",
-    category: "Travel",
-  },
-  {
-    imageSrc: property2,
-    title: "157 West Central Park",
-    date: "18 September 2023",
-    category: "Moon",
-  },
-  {
-    imageSrc: property3,
-    title: "245 Azabu Nishi Park let",
-    date: "18 September 2023",
-    category: "House",
-  },
-  {
-    imageSrc: property4,
-    title: "204 Montal South Bela Two",
-    date: "18 September 2023",
-    category: "Coming",
-  },
-  {
-    imageSrc: property5,
-    title: "204 Montal South Bela Two",
-    date: "18 September 2023",
-    category: "Travel",
-  },
-  {
-    imageSrc: property6,
-    title: "204 Montal South Bela Two",
-    date: "18 September 2023",
-    category: "Park",
-  },
-  {
-    imageSrc: property7,
-    title: "204 Montal South Bela Two",
-    date: "18 September 2023",
-    category: "Dubai",
-  },
-];
+//  [
+//   {
+//     imageSrc: property1,
+//     title: "206 Mount Olive Road Two",
+//     date: "18 September 2023",
+//     category: "Travel",
+//   }
+// ];
 
 export const Blogs = () => {
+  const [propertyData, setPropertyData]=useState([])
+  
+  useEffect(()=>{
+    const fetchNews = async()=>{
+      try{
+        const res= await axios.get("http://127.0.0.1:8000/news/")
+        setPropertyData(res.data)
+      }catch(err){
+        console.log(err)
+      }   
+    }
+    fetchNews();
+  },[])
+
   return (
     <>
       <section className="intro-single">

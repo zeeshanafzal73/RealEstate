@@ -1,41 +1,24 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import property1 from "./Static/img/agent-1.jpg";
-import property2 from "./Static/img/agent-2.jpg";
-import property3 from "./Static/img/agent-3.jpg";
-import './Navbar/Navbar.css'
-
-
-const agentData = [
-  {
-    imageSrc: property1,
-    title: "Margaret Sotillo",
-    description:
-      "Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two",
-    phone: "+54 356 945234",
-    email: "agents@example.com",
-  },
-  {
-    imageSrc: property2,
-    title: "Margaret Sotillo",
-    description:
-      "Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two",
-    phone: "+54 356 945234",
-    email: "agents@example.com",
-  },
-  {
-    imageSrc: property3,
-    title: "Margaret Sotillo",
-    description:
-      "Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two",
-    phone: "+54 356 945234",
-    email: "agents@example.com",
-  },
-];
+import { Link } from "react-router-dom";
+import "./Navbar/Navbar.css";
+import axios from "axios";
 
 export const Agents = () => {
+  const [agentData, setAgent]= useState([])
+  useEffect(()=>{
+    const fetch = async()=>{
+      try{
+        const res= await axios.get("http://127.0.0.1:8000/agent/")
+        setAgent(res.data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetch()
+  },[])
   return (
     <Container>
       <Row>
@@ -45,10 +28,10 @@ export const Agents = () => {
               <h2 className="title-a">Best Agents</h2>
             </div>
             <div className="title-link">
-              <a href="agents-grid.html">
-              <strong>All Agents </strong>  
-              <FontAwesomeIcon icon={faChevronRight}/>
-              </a>
+              <Link to="/agents">
+                <strong>All Agents </strong>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </Link>
             </div>
           </div>
         </Col>

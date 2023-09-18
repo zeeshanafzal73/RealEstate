@@ -29,9 +29,9 @@ export default class Navbar extends Component {
               <span></span>
               <span></span>
             </button>
-            <a className="navbar-brand text-brand" href="index.html">
+            <Link className="navbar-brand text-brand" to="/home">
               Estate<span className="color-b">Agency</span>
-            </a>
+            </Link>
 
             <div
               className="navbar-collapse collapse justify-content-center"
@@ -105,15 +105,14 @@ export default class Navbar extends Component {
             >
               <FontAwesomeIcon icon={faSearch} />
             </button>
-            {this.state.isSearchVisible && <Search />}  
+            {this.state.isSearchVisible && <Search />}
           </div>
-          <ul>
-              <div className="nav-item">
-              <Link className="nav-link " to="/" onClick={this.props.onLogout}>
-                Logout
-              </Link>
-            </div>
-            </ul>
+
+          <div className="nav-item">
+            <Link className="nav-link " to="/" onClick={this.props.onLogout}>
+              Logout
+            </Link>
+          </div>
         </nav>
       </>
     );
