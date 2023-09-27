@@ -80,7 +80,7 @@ export const Contact = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-12 section-t8">
+            <div className="col-sm-12 section-t8" >
               <div className="row">
                 <div className="col-md-7">
                   <form
@@ -154,7 +154,7 @@ export const Contact = () => {
                   </form>
                 </div>
                 {data.map((item, index) => (
-                  <div className="col-md-5 section-md-t3">
+                  <div className="col-md-5 section-md-t3" key={index}>
                     <div className="icon-box section-b2">
                       <div className="icon-box-icon">
                         <span className="bi bi-envelope"></span>
@@ -175,7 +175,7 @@ export const Contact = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="icon-box section-b2">
+                    <div className="icon-box section-b2" key={index}>
                       <div className="icon-box-icon">
                         <span className="bi bi-geo-alt"></span>
                       </div>

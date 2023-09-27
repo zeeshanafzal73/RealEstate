@@ -19,7 +19,7 @@ export const LatestNews = () => {
 
   const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex, e) => {
+  const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
@@ -42,7 +42,7 @@ export const LatestNews = () => {
           <Col md={12}>
             <div className="title-wrap d-flex justify-content-between">
               <div className="title-box">
-                <h2 className="title-a">Latest Properties</h2>
+                <h2 className="title-a">Latest News</h2>
               </div>
               <div className="title-link">
                 <Link to="/blogs">
@@ -72,12 +72,12 @@ export const LatestNews = () => {
             {groupedPropertyData.map((group, groupIndex) => (
               <Carousel.Item key={groupIndex}>
                 <div className="row">
-                  {group.map((property, propertyIndex) => (
-                    <div className="col-md-4" key={propertyIndex}>
+                  {group.map((news, Index) => (
+                    <div className="col-md-4" key={Index}>
                       <div className="card-box-a card-shadow">
                         <div className="img-box-a">
                           <img
-                            src={property.imageSrc}
+                            src={news.imageSrc}
                             alt=""
                             className="img-a img-fluid"
                             //   style={{ width: "30px", height: "auto" }}
@@ -88,19 +88,19 @@ export const LatestNews = () => {
                             <div className="card-header-a">
                               <div className="price-box d-flex">
                                 <span className="price-a">
-                                  {property.category}
+                                  {news.category}
                                 </span>
                               </div>
                               <h2 className="card-title-a">
-                                <a href="property-single.html">
-                                  {property.title}
-                                </a>
+                                <Link to={`/SingleNews/${news.id}`}>
+                                  {news.title}
+                                </Link>
                               </h2>
                             </div>
                             <div className="card-body-a">
                               <div className="card-date">
                                 <span className="date-b text-white">
-                                  {property.date}
+                                  {news.date}
                                 </span>
                               </div>
                             </div>

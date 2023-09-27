@@ -4,6 +4,7 @@ import { Carousel, Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { Property } from "./Pages/Property";
 
 export const LatestProperties = () => {
   const [propertyData, setPropertyData] = useState([]);
@@ -101,10 +102,10 @@ export const LatestProperties = () => {
                                   {property.category}
                                 </span>
                               </div>
-                              <a href="#" className="link-a">
+                              <Link to={`/SingleProperty/${property.id}`} className="link-a">
                                 Click here to view
                                 <span className="bi bi-chevron-right"></span>
-                              </a>
+                              </Link>
                             </div>
                             <div className="card-footer-a">
                               <ul className="card-info d-flex justify-content-around">

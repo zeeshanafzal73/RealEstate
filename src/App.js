@@ -14,6 +14,9 @@ import { Blogs } from "./components/Pages/Blogs";
 import { Contact } from "./components/Pages/Contact";
 import { Search } from "react-bootstrap-icons";
 import { Login } from "./components/Pages/Login";
+import { SingleAgent } from "./components/SingleAgent";
+import { SingleProperty } from "./components/SingleProperty";
+import { SingleNews } from "./components/SingleNews";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -50,11 +53,14 @@ export default function App() {
           }
         />
         {isLoggedIn && <Route path="/home" element={<Home />} />}
-        {isLoggedIn && <Route path="/about" element={<About />} />}
-        {isLoggedIn && <Route path="/property" element={<Property />} />}
-        {isLoggedIn && <Route path="/blogs" element={<Blogs />} />}
-        {isLoggedIn && <Route path="/contact" element={<Contact />} />}
-        {isLoggedIn && <Route path="/search" element={<Search />} />}
+         <Route path="/about" element={<About />} />
+        <Route path="/property" element={<Property />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/SingleAgent/:aid" element={<SingleAgent />} />
+        <Route path="/SingleProperty/:pid" element={<SingleProperty />} />
+        <Route path="/SingleNews/:nid" element={<SingleNews/>}/>
       </Routes>
       {isLoggedIn && <Footer />}
     </Router>

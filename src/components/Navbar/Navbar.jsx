@@ -61,40 +61,11 @@ export default class Navbar extends Component {
                     Blog
                   </Link>
                 </li>
-
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Pages
-                  </Link>
-                  <div className="dropdown-menu">
-                    <Link className="dropdown-item " to="/property-single">
-                      Property Single
-                    </Link>
-                    <Link className="dropdown-item " to="/property-single">
-                      Blog Single
-                    </Link>
-
-                    <Link className="dropdown-item " to="/agents-grid">
-                      Agents Grid
-                    </Link>
-                    <Link className="dropdown-item " to="/agent-single">
-                      Agent Single
-                    </Link>
-                  </div>
-                </li>
                 <li className="nav-item">
                   <Link className="nav-link " to="/contact">
                     Contact
                   </Link>
-                </li>
+                </li> 
               </ul>
             </div>
 
