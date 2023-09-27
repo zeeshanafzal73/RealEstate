@@ -6,13 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-
 
 export const SingleNews = () => {
   const { nid } = useParams();
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [comment, setComment] = useState("");
+  const [message, setMessage] = useState("");
+  const [response, setResponse] = useState([]);
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -29,6 +31,37 @@ export const SingleNews = () => {
 
     fetchData();
   }, [nid]); // Make sure to include 'nid' in the dependency array to fetch data when it changes
+
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const res = await axios.get("http://127.0.0.1:8000/messages/");
+        setResponse(res.data);
+      };
+
+      fetchData();
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }, []);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    try {
+      axios.post("http://127.0.0.1:8000/messages/", {
+        name,
+        email,
+        comment,
+      });
+    } catch (err) {
+      console.log("Error", err);
+    }
+    // Clear the input fields
+    setName("");
+    setEmail("");
+    setComment("");
+    setMessage("Message Sent Successfully");
+  };
 
   return (
     <>
@@ -97,13 +130,11 @@ export const SingleNews = () => {
                 <blockquote className="blockquote">
                   <p className="mb-4"> {data && data.quote}</p>
                   <footer className="blockquote-footer">
-                    <strong>{data&&data.author}</strong>
+                    <strong>{data && data.author}</strong>
                     <cite title="Source Title"> Author</cite>
                   </footer>
                 </blockquote>
-                <p>
-               {data && data.paragraph}
-                </p>
+                <p>{data && data.paragraph}</p>
               </div>
               <div className="post-footer">
                 <div className="post-share">
@@ -111,22 +142,22 @@ export const SingleNews = () => {
                   <ul className="list-inline socials">
                     <li className="list-inline-item">
                       <Link to="#">
-                    <FontAwesomeIcon icon={faFacebookF}/>
+                        <FontAwesomeIcon icon={faFacebookF} />
                       </Link>
                     </li>
                     <li className="list-inline-item">
                       <Link to="#">
-                      <FontAwesomeIcon icon={faTwitter}/>
+                        <FontAwesomeIcon icon={faTwitter} />
                       </Link>
                     </li>
                     <li className="list-inline-item">
                       <Link to="#">
-                      <FontAwesomeIcon icon={faInstagram}/>
+                        <FontAwesomeIcon icon={faInstagram} />
                       </Link>
                     </li>
                     <li className="list-inline-item">
                       <Link to="#">
-                      <FontAwesomeIcon icon={faLinkedin}/>
+                        <FontAwesomeIcon icon={faLinkedin} />
                       </Link>
                     </li>
                   </ul>
@@ -135,109 +166,73 @@ export const SingleNews = () => {
             </div>
             <div className="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
               <div className="title-box-d">
-                <h3 className="title-d">Comments (4)</h3>
+                <h3 className="title-d">Comments </h3>
               </div>
-              <div className="box-comments">
-                <ul className="list-comments">
-                  <li>
-                    <div className="comment-avatar">
-                      <img src="assets/img/author-2.jpg" alt="" />
-                    </div>
-                    <div className="comment-details">
-                      <h4 className="comment-author">Emma Stone</h4>
-                      <span>18 Sep 2017</span>
-                      <p className="comment-description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Dolores reprehenderit, provident cumque ipsam
-                        temporibus maiores quae natus libero optio, at qui
-                        beatae ducimus placeat debitis voluptates amet corporis.
-                      </p>
-                      <a href="3">Reply</a>
-                    </div>
-                  </li>
-                  <li className="comment-children">
-                    <div className="comment-avatar">
-                      <img src="assets/img/author-1.jpg" alt="" />
-                    </div>
-                    <div className="comment-details">
-                      <h4 className="comment-author">Oliver Colmenares</h4>
-                      <span>18 Sep 2017</span>
-                      <p className="comment-description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Dolores reprehenderit, provident cumque ipsam
-                        temporibus maiores quae.
-                      </p>
-                      <a href="3">Reply</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="comment-avatar">
-                      <img src="assets/img/author-2.jpg" alt="" />
-                    </div>
-                    <div className="comment-details">
-                      <h4 className="comment-author">Emma Stone</h4>
-                      <span>18 Sep 2017</span>
-                      <p className="comment-description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Dolores reprehenderit, provident cumque ipsam
-                        temporibus maiores quae natus libero optio.
-                      </p>
-                      <a href="3">Reply</a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              {response.map((data) => (
+                <div className="box-comments" key={data.id}>
+                  <ul className="list-comments">
+                    <li>
+                      <div className="comment-details">
+                        <h4 className="comment-author">{data.name}</h4>
+                        <span>18 Sep 2017</span>
+                        <p className="comment-description">{data.comment}</p>
+                        <a href="3">Reply</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              ))}
+
               <div className="form-comments">
                 <div className="title-box-d">
                   <h3 className="title-d"> Leave a Reply</h3>
                 </div>
-                <form className="form-a">
+                <form className="form-a" onSubmit={submitHandler}>
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <div className="form-group">
-                        <label for="inputName">Enter name</label>
+                        <label htmlFor="inputName">Enter name</label>
                         <input
                           type="text"
                           className="form-control form-control-lg form-control-a"
-                          id="inputName"
+                          id="Name"
+                          name="Name"
+                          value={name}
                           placeholder="Name *"
+                          onChange={(e) => setName(e.target.value)}
                           required
                         />
                       </div>
                     </div>
                     <div className="col-md-6 mb-3">
                       <div className="form-group">
-                        <label for="inputEmail1">Enter email</label>
+                        <label htmlFor="inputEmail1">Enter email</label>
                         <input
                           type="email"
                           className="form-control form-control-lg form-control-a"
-                          id="inputEmail1"
+                          id="Email"
+                          name="Email"
+                          value={email}
                           placeholder="Email *"
+                          onChange={(e) => setEmail(e.target.value)}
                           required
                         />
                       </div>
                     </div>
                     <div className="col-md-12 mb-3">
                       <div className="form-group">
-                        <label for="inputUrl">Enter website</label>
-                        <input
-                          type="url"
-                          className="form-control form-control-lg form-control-a"
-                          id="inputUrl"
-                          placeholder="Website"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-12 mb-3">
-                      <div className="form-group">
-                        <label for="textMessage">Enter message</label>
+                        <label htmlFor="textMessage">Enter message</label>
                         <textarea
-                          id="textMessage"
+                          id="Comment"
                           className="form-control"
                           placeholder="Comment *"
-                          name="message"
+                          name="Comment"
+                          value={comment}
                           cols="45"
                           rows="8"
+                          onChange={(e) => {
+                            setComment(e.target.value);
+                          }}
                           required
                         ></textarea>
                       </div>
@@ -250,6 +245,7 @@ export const SingleNews = () => {
                   </div>
                 </form>
               </div>
+              {message && <p className="text-success">{message}</p>}
             </div>
           </div>
         </div>

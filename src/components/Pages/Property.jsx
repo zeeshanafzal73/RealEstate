@@ -28,7 +28,7 @@ fetch()
  
   return (
     <>
-      <section className="intro-single" style={{marginTop :'-5rem'}}>
+      <section className="intro-single" style={{marginTop :'-6rem'}}>
         <Container>
           <Row>
             <Col md={8}>
@@ -86,7 +86,7 @@ fetch()
                     <div className="card-overlay-a-content">
                       <div className="card-header-a">
                         <h2 className="card-title-a">
-                          <a href="property-single.html">{property.title}</a>
+                          <Link to={`/SingleProperty/${property.id}`}>{property.title}</Link>
                         </h2>
                       </div>
                       <div className="card-body-a">

@@ -6,6 +6,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import login from "./../Static/img/login.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const Login = (props) => {
   const [username, setUsername] = useState("");
@@ -99,9 +100,6 @@ export const Login = (props) => {
                     required
                     onChange={(e) => setUsername(e.target.value)}
                   />
-                  <label className="form-label" htmlFor="form3Example3">
-                    Username
-                  </label>
                 </div>
                 <div className="form-outline mb-3">
                   <input
@@ -114,28 +112,6 @@ export const Login = (props) => {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <label className="form-label" htmlFor="form3Example4">
-                    Password
-                  </label>
-                </div>
-
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="form-check mb-0">
-                    <input
-                      className="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="checkbox"
-                      name="checkbox"
-                      required
-                    />
-                    <label className="form-check-label" htmlFor="form2Example3">
-                      Remember me
-                    </label>
-                  </div>
-                  <a href="#!" className="text-body">
-                    Forgot password?
-                  </a>
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">
@@ -146,11 +122,17 @@ export const Login = (props) => {
                   >
                     Login
                   </button>
+                  <br /><br />
+                  <div className="d-flex justify-content-between align-items-center">
+                  <a href="#!" className="text-body">
+                    Forgot password?
+                  </a>
+                </div>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
-                    Don't have an account?{" "}
-                    <a href="#!" className="link-success">
+                    Don't have an account?
+                    <Link to="/register" className="link-success">
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
                 {error && <p className="text-danger">{error}</p>}

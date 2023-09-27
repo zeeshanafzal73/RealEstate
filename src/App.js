@@ -17,6 +17,9 @@ import { Login } from "./components/Pages/Login";
 import { SingleAgent } from "./components/SingleAgent";
 import { SingleProperty } from "./components/SingleProperty";
 import { SingleNews } from "./components/SingleNews";
+import { SingleTeam } from "./components/SingleTeam";
+import { Agents } from "./components/Agents";
+import { Register } from "./components/Pages/Register";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -53,7 +56,9 @@ export default function App() {
           }
         />
         {isLoggedIn && <Route path="/home" element={<Home />} />}
-         <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/about" element={<About />} />
+        <Route path="/agents" element={<Agents/>}/>
         <Route path="/property" element={<Property />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/contact" element={<Contact />} />
@@ -61,6 +66,7 @@ export default function App() {
         <Route path="/SingleAgent/:aid" element={<SingleAgent />} />
         <Route path="/SingleProperty/:pid" element={<SingleProperty />} />
         <Route path="/SingleNews/:nid" element={<SingleNews/>}/>
+        <Route path="/SingleTeam/:tid" element={<SingleTeam/>}/>
       </Routes>
       {isLoggedIn && <Footer />}
     </Router>

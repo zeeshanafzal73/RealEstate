@@ -28,7 +28,7 @@ export const Blogs = () => {
 
   return (
     <>
-      <section className="intro-single">
+      <section className="intro-single" style={{marginTop:'-6rem'}}>
         <div className="container">
           <div className="row">
             <div className="col-md-12 col-lg-8">
@@ -63,8 +63,8 @@ export const Blogs = () => {
       <section className="news-grid grid">
         <div className="container">
           <div className="row">
-            {propertyData.map((data, index) => (
-              <div className="col-md-4" key={index}>
+            {propertyData.map((data) => (
+              <div className="col-md-4" key={data.id}>
                 <div className="card-box-b card-shadow news-box">
                   <div className="img-box-b">
                     <img
@@ -82,10 +82,10 @@ export const Blogs = () => {
                       </div>
                       <div className="card-title-b">
                         <h2 className="title-2">
-                          <a href="blog-single.html">
+                        <Link to={`/SingleNews/${data.id}`}>
                             {data.title}
                             <br /> new
-                          </a>
+                          </Link>
                         </h2>
                       </div>
                       <div className="card-date">

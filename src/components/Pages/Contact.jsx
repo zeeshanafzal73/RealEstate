@@ -10,6 +10,10 @@ import axios from "axios";
 
 export const Contact = () => {
   const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [comment, setComment] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetch = async () => {
@@ -23,10 +27,32 @@ export const Contact = () => {
     fetch();
   }, []);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    try {
+      axios.post("http://127.0.0.1:8000/contactus/", {
+        name,
+        email,
+        comment,
+      });
+    } catch (err) {
+      console.log("Error", err);
+    }
+    // Clear the input fields
+    setName("");
+    setEmail("");
+    setComment("");
+    setMessage("Message Sent Successfully");
+  };
+
   return (
     <>
       {data.map((item, index) => (
-        <section className="intro-single" key={index}>
+        <section
+          className="intro-single"
+          key={index}
+          style={{ marginTop: "-6rem" }}
+        >
           <div className="container">
             <div className="row">
               <div className="col-md-12 col-lg-8">
@@ -80,23 +106,21 @@ export const Contact = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-12 section-t8" >
+            <div className="col-sm-12 section-t8">
               <div className="row">
                 <div className="col-md-7">
-                  <form
-                    action=""
-                    method="post"
-                    role="form"
-                    className="php-email-form"
-                  >
+                  <form className="form-a" onSubmit={submitHandler}>
                     <div className="row">
                       <div className="col-md-6 mb-3">
                         <div className="form-group">
                           <input
                             type="text"
-                            name="name"
                             className="form-control form-control-lg form-control-a"
-                            placeholder="Your Name"
+                            id="Name"
+                            name="Name"
+                            value={name}
+                            placeholder="Name *"
+                            onChange={(e) => setName(e.target.value)}
                             required
                           />
                         </div>
@@ -104,54 +128,42 @@ export const Contact = () => {
                       <div className="col-md-6 mb-3">
                         <div className="form-group">
                           <input
-                            name="email"
                             type="email"
                             className="form-control form-control-lg form-control-a"
-                            placeholder="Your Email"
+                            id="Email"
+                            name="Email"
+                            value={email}
+                            placeholder="Email *"
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                           />
                         </div>
                       </div>
                       <div className="col-md-12 mb-3">
                         <div className="form-group">
-                          <input
-                            type="text"
-                            name="subject"
-                            className="form-control form-control-lg form-control-a"
-                            placeholder="Subject"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-12">
-                        <div className="form-group">
                           <textarea
-                            name="message"
+                            id="Comment"
                             className="form-control"
+                            placeholder="Message *"
+                            name="Comment"
+                            value={comment}
                             cols="45"
                             rows="8"
-                            placeholder="Message"
+                            onChange={(e) => {
+                              setComment(e.target.value);
+                            }}
                             required
                           ></textarea>
                         </div>
                       </div>
-                      <div className="col-md-12 my-3">
-                        <div className="mb-3">
-                          <div className="loading">Loading</div>
-                          <div className="error-message"></div>
-                          <div className="sent-message">
-                            Your message has been sent. Thank you!
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-md-12 text-center">
+                      <div className="col-md-12">
                         <button type="submit" className="btn btn-a">
                           Send Message
                         </button>
                       </div>
                     </div>
                   </form>
+                  {message && <p className="text-success">{message}</p>}
                 </div>
                 {data.map((item, index) => (
                   <div className="col-md-5 section-md-t3" key={index}>
@@ -165,11 +177,11 @@ export const Contact = () => {
                         </div>
                         <div className="icon-box-content">
                           <p className="mb-1">
-                           <strong>Email:</strong> 
+                            <strong>Email:</strong>
                             <span className="color-a">{item.email}</span>
                           </p>
                           <p className="mb-1">
-                           <strong>Phone:</strong> 
+                            <strong>Phone:</strong>
                             <span className="color-a">{item.phone}</span>
                           </p>
                         </div>

@@ -4,14 +4,10 @@ import pic1 from "./../Static/img/about-2.jpg";
 import { Link } from "react-router-dom";
 import { Team } from "../Team";
 
-
-
-
 export const About = () => {
-
   return (
     <>
-      <section className="intro-single">
+      <section className="intro-single" style={{marginTop:'-6rem'}}>
         <div className="container">
           <div className="row">
             <div className="col-md-12 col-lg-8">
@@ -63,11 +59,7 @@ export const About = () => {
             <div className="col-md-12 section-t8 position-relative">
               <div className="row">
                 <div className="col-md-6 col-lg-5">
-                  <img
-                    src={pic1}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={pic1} alt="" className="img-fluid" />
                 </div>
                 <div className="col-lg-2  d-none d-lg-block position-relative">
                   <div className="title-vertical d-flex justify-content-start">
@@ -98,26 +90,14 @@ export const About = () => {
                     lacinia eget consectetur sed, convallis at tellus.
                   </p>
                 </div>
-              </div>   
+              </div>
             </div>
           </div>
         </div>
       </section>
       <section class="section-agents section-t8">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-wrap d-flex justify-content-between">
-              <div class="title-box">
-                <h2 class="title-a">Meet Our Team</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <Team/>
-        </section>
-    
+        <Team />
+      </section>
     </>
   );
 };

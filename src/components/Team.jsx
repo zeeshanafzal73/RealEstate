@@ -3,6 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const Team = () => {
   const [agentData, setAgentData] = useState([]);
@@ -27,17 +28,17 @@ export const Team = () => {
               <h2 className="title-a">Team Members</h2>
             </div>
             <div className="title-link">
-              <a href="agents-grid.html">
+              <Link to="#">
                 <strong>All Team Members </strong>
                 <FontAwesomeIcon icon={faChevronRight} />
-              </a>
+              </Link>
             </div>
           </div>
         </Col>
       </Row>
       <Row>
-        {agentData.map((agent, index) => (
-          <Col md={4} key={index}>
+        {agentData.map((agent) => (
+          <Col md={4} key={agent.id}>
             <Card className="card-box-d">
               <div className="card-img-d">
                 <Card.Img
@@ -50,9 +51,9 @@ export const Team = () => {
                 <Card.Header className="card-header-d">
                   <div className="card-title-d align-self-center">
                     <h3 className="title-d">
-                      <a href="agent-single.html" className="link-two">
+                      <Link to={`/SingleTeam/${agent.id}`} className="link-two">
                         {agent.title}
-                      </a>
+                      </Link>
                     </h3>
                   </div>
                 </Card.Header>
