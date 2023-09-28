@@ -20,6 +20,7 @@ import { SingleNews } from "./components/SingleNews";
 import { SingleTeam } from "./components/SingleTeam";
 import { Agents } from "./components/Agents";
 import { Register } from "./components/Pages/Register";
+import { ResetPassword } from "./components/ResetPassword";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -67,6 +68,7 @@ export default function App() {
         <Route path="/SingleProperty/:pid" element={<SingleProperty />} />
         <Route path="/SingleNews/:nid" element={<SingleNews/>}/>
         <Route path="/SingleTeam/:tid" element={<SingleTeam/>}/>
+        <Route path="/ResetPassword" element={<ResetPassword />}/>
       </Routes>
       {isLoggedIn && <Footer />}
     </Router>

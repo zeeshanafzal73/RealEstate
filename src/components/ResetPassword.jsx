@@ -1,45 +1,41 @@
 import React, { useState } from "react";
-import register from "./../Static/img/reg.jpg";
+import register from "./Static/img/reg.jpg";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Register = () => {
+export const ResetPassword = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [email, setEmail] = useState("");
-  const [first_name, setFirstname] = useState("");
-  const [last_name, setLastname] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  const navigate = useNavigate();
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
     try {
-      axios.post("http://127.0.0.1:8000/register/", {
-        username: username,
-        password: password,
-        password2: password2,
-        email: email,
-        first_name: first_name,
-        last_name: last_name,
-      });
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/password_reset/",
+        {
+          username: username,
+          password: password,
+          password2: password2,
+        }
+      );
+
+      if (response.status === 200) {
+        setMessage(response.data.message);
+        setError("");
+      }
     } catch (err) {
-      console.log("error", err);
+      console.error("Error:", err);
+      setMessage("");
+      setError("An error occurred while processing your request.");
     }
     setUsername("");
-    setEmail("");
     setPassword("");
     setPassword2("");
-    setFirstname("");
-    setLastname("");
-    setMessage("Account Registered Successfully");
   };
-
   return (
     <>
       <section className="vh-50" style={{ backgroundColor: "#eee" }}>
@@ -51,7 +47,7 @@ export const Register = () => {
                   <div className="row justify-content-center">
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                        Sign up
+                        Password Reset
                       </p>
 
                       <form className="mx-1 mx-md-4" onSubmit={submitHandler}>
@@ -70,25 +66,6 @@ export const Register = () => {
                             />
                             <label className="form-label" htmlFor="Username">
                               Username
-                            </label>
-                          </div>
-                        </div>
-
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0">
-                            <input
-                              type="email"
-                              id="Email"
-                              value={email}
-                              required
-                              onChange={(e) => {
-                                setEmail(e.target.value);
-                              }}
-                              className="form-control"
-                            />
-                            <label className="form-label" htmlFor="Email">
-                              Your Email
                             </label>
                           </div>
                         </div>
@@ -131,44 +108,6 @@ export const Register = () => {
                           </div>
                         </div>
 
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0">
-                            <input
-                              type="text"
-                              id="firstname"
-                              value={first_name}
-                              required
-                              onChange={(e) => {
-                                setFirstname(e.target.value);
-                              }}
-                              className="form-control"
-                            />
-                            <label className="form-label" htmlFor="firstname">
-                              First Name
-                            </label>
-                          </div>
-                        </div>
-
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0">
-                            <input
-                              type="text"
-                              id="lastname"
-                              value={last_name}
-                              required
-                              onChange={(e) => {
-                                setLastname(e.target.value);
-                              }}
-                              className="form-control"
-                            />
-                            <label className="form-label" htmlFor="lastname">
-                              Last Name
-                            </label>
-                          </div>
-                        </div>
-
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
                             type="submit"
@@ -178,17 +117,18 @@ export const Register = () => {
                               paddingRight: "2.5rem",
                             }}
                           >
-                            Register
+                            Reset
                           </button>
                         </div>
                       </form>
                       <p className="small fw-bold mt-2 pt-1 mb-0">
-                        Have an account?
+                        Login account?
                         <Link to="/" className="link-success">
                           Login
                         </Link>
                       </p>
                       {message && <p className="text-success">{message}</p>}
+                      {error && <p className="text-danger">{error}</p>}
                     </div>
                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                       <img

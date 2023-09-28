@@ -13,8 +13,7 @@ export const Login = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
-  
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -34,7 +33,7 @@ export const Login = (props) => {
         if (response.data.token) {
           // Store the token in your application (e.g., in local storage)
           localStorage.setItem("token", response.data.token);
-          props.onLogin()
+          props.onLogin();
           // Redirect to the home page if login is successful
           navigate("/home");
         }
@@ -53,11 +52,11 @@ export const Login = (props) => {
 
   return (
     <>
-      <section className="vh-100" style={{ marginTop: "4rem" }}>
+      <section className="vh-100">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
-              <img src={login} className="img-fluid" alt="Sample image" />
+              <img src={login} className="img-fluid" alt="" />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
               <form onSubmit={submitHandler}>
@@ -89,7 +88,7 @@ export const Login = (props) => {
                   <p className="text-center fw-bold mx-3 mb-0">Or</p>
                 </div>
 
-                <div className="form-outline mb-4">
+                <div className="mb-4">
                   <input
                     type="text"
                     id="username"
@@ -101,7 +100,7 @@ export const Login = (props) => {
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-                <div className="form-outline mb-3">
+                <div className="mb-3">
                   <input
                     type="password"
                     id="password"
@@ -122,12 +121,13 @@ export const Login = (props) => {
                   >
                     Login
                   </button>
-                  <br /><br />
+                  <br />
+                  <br />
                   <div className="d-flex justify-content-between align-items-center">
-                  <a href="#!" className="text-body">
-                    Forgot password?
-                  </a>
-                </div>
+                    <Link to="/ResetPassword" className="text-body">
+                      Forgot password?
+                    </Link>
+                  </div>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?
                     <Link to="/register" className="link-success">
