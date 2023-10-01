@@ -95,7 +95,7 @@ export const About = () => {
           </div>
         </div>
       </section>
-      <section class="section-agents section-t8">
+      <section className="section-agents section-t8">
         <Team />
       </section>
     </>

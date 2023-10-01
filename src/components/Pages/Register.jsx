@@ -11,13 +11,17 @@ export const Register = () => {
   const [first_name, setFirstname] = useState("");
   const [last_name, setLastname] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    setMessage(""); // Clear any previous messages
+    setError(""); // Clear any previous errors
+
     try {
-      axios.post("http://127.0.0.1:8000/register/", {
+      const response = await axios.post("http://127.0.0.1:8000/register/", {
         username: username,
         password: password,
         password2: password2,
@@ -25,12 +29,15 @@ export const Register = () => {
         first_name: first_name,
         last_name: last_name,
       });
+
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 3000);
     } catch (err) {
       console.log("error", err);
+      setError("An error occurred while processing your request.");
     }
+
     setUsername("");
     setEmail("");
     setPassword("");
@@ -39,7 +46,6 @@ export const Register = () => {
     setLastname("");
     setMessage("Account Registered Successfully");
   };
-
   return (
     <>
       <section className="vh-50" style={{ backgroundColor: "#eee" }}>
@@ -189,6 +195,7 @@ export const Register = () => {
                         </Link>
                       </p>
                       {message && <p className="text-success">{message}</p>}
+                      {error && <p className="text-danger">{error}</p>}
                     </div>
                     <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                       <img
