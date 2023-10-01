@@ -1,0 +1,9 @@
+/* Add space between agent pictures */
+.agent-slide {
+    margin-right: 20px; /* Adjust the margin as needed */
+  }
+  
+  .slick-dots {
+    bottom:-30px; /* Adjust the position as needed */
+  }
+  

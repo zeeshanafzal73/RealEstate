@@ -21,6 +21,7 @@ import { SingleTeam } from "./components/SingleTeam";
 import { Agents } from "./components/Agents";
 import { Register } from "./components/Pages/Register";
 import { ResetPassword } from "./components/ResetPassword";
+import { AllTeam } from "./components/AllTeam";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -57,18 +58,19 @@ export default function App() {
           }
         />
         {isLoggedIn && <Route path="/home" element={<Home />} />}
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
-        <Route path="/agents" element={<Agents/>}/>
+        <Route path="/agents" element={<Agents />} />
         <Route path="/property" element={<Property />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/search" element={<Search />} />
         <Route path="/SingleAgent/:aid" element={<SingleAgent />} />
         <Route path="/SingleProperty/:pid" element={<SingleProperty />} />
-        <Route path="/SingleNews/:nid" element={<SingleNews/>}/>
-        <Route path="/SingleTeam/:tid" element={<SingleTeam/>}/>
-        <Route path="/ResetPassword" element={<ResetPassword />}/>
+        <Route path="/SingleNews/:nid" element={<SingleNews />} />
+        <Route path="/SingleTeam/:tid" element={<SingleTeam />} />
+        <Route path="/ResetPassword" element={<ResetPassword />} />
+        <Route path="/AllTeam" element={<AllTeam />} />
       </Routes>
       {isLoggedIn && <Footer />}
     </Router>

@@ -100,7 +100,7 @@ export const SingleNews = () => {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
-              <div className="news-img-box" style={{ marginTop: "2rem" }}>
+              <div className="news-img-box" style={{ marginTop: "2rem", textAlign:'center' }}>
                 <img src={data && data.imageSrc} alt="" className="img-fluid" />
               </div>
             </div>

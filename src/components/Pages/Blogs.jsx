@@ -1,34 +1,26 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-//  [
-//   {
-//     imageSrc: property1,
-//     title: "206 Mount Olive Road Two",
-//     date: "18 September 2023",
-//     category: "Travel",
-//   }
-// ];
 
 export const Blogs = () => {
-  const [propertyData, setPropertyData]=useState([])
-  
-  useEffect(()=>{
-    const fetchNews = async()=>{
-      try{
-        const res= await axios.get("http://127.0.0.1:8000/news/")
-        setPropertyData(res.data)
-      }catch(err){
-        console.log(err)
-      }   
-    }
+  const [propertyData, setPropertyData] = useState([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const res = await axios.get("http://127.0.0.1:8000/news/");
+        setPropertyData(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchNews();
-  },[])
+  }, []);
 
   return (
     <>
-      <section className="intro-single" style={{marginTop:'-6rem'}}>
+      <section className="intro-single" style={{ marginTop: "-6rem" }}>
         <div className="container">
           <div className="row">
             <div className="col-md-12 col-lg-8">
@@ -82,7 +74,7 @@ export const Blogs = () => {
                       </div>
                       <div className="card-title-b">
                         <h2 className="title-2">
-                        <Link to={`/SingleNews/${data.id}`}>
+                          <Link to={`/SingleNews/${data.id}`}>
                             {data.title}
                             <br /> new
                           </Link>

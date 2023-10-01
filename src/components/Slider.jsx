@@ -25,7 +25,12 @@ const fadeImages = [
 export const Slideshow = () => {
   return (
     <div className="slide-container">
-      <Fade duration={3000} controls={false} pauseOnHover={false}>
+      <Fade
+        duration={3000}
+        controls={false}
+        pauseOnHover={false}
+        arrows={false}
+      >
         {fadeImages.map((fadeImage, index) => (
           <div key={index}>
             <div className="intro intro-carousel swiper position-relative">

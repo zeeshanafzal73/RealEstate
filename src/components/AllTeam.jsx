@@ -2,33 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import "./Navbar/Navbar.css";
 import axios from "axios";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import './Agent.css'
+import { Link } from "react-router-dom";
 
-
-
-export const Agents = () => {
+export const AllTeam = () => {
   const [agentData, setAgent] = useState([]);
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true, 
-    autoplaySpeed: 3000,
-  };
- 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/agent/");
+        const res = await axios.get("http://127.0.0.1:8000/team/");
         setAgent(res.data);
       } catch (err) {
         console.log(err);
@@ -39,16 +22,16 @@ export const Agents = () => {
 
   return (
     <>
-      <Container style={{marginTop:'4rem'}}>
+      <Container>
         <Row>
           <Col md={12}>
             <div className="title-wrap d-flex justify-content-between">
               <div className="title-box">
-                <h2 className="title-a">Best Agents</h2>
+                <h2 className="title-a">Best Team</h2>
               </div>
               <div className="title-link">
-                <Link to="/agents">
-                  <strong>All Agents </strong>
+                <Link to="/team">
+                  <strong>All Team </strong>
                   <FontAwesomeIcon icon={faChevronRight} />
                 </Link>
               </div>
@@ -56,10 +39,8 @@ export const Agents = () => {
           </Col>
         </Row>
         <Row>
-        <Slider  {...sliderSettings}>
           {agentData.map((agent) => (
             <Col md={4} key={agent.id}>
-              <div className="agent-slide">
               <Card className="card-box-d">
                 <div className="card-img-d">
                   <Card.Img
@@ -71,11 +52,11 @@ export const Agents = () => {
                 <div className="card-overlay card-overlay-hover">
                   <Card.Header className="card-header-d">
                     <div className="card-title-d align-self-center">
-                      <h3
-                        className="title-d"
-
-                      >
-                        <Link to={`/SingleAgent/${agent.id}`} className="link-two">
+                      <h3 className="title-d">
+                        <Link
+                          to={`/SingleTeam/${agent.id}`}
+                          className="link-two"
+                        >
                           {agent.title}
                         </Link>
                       </h3>
@@ -131,10 +112,8 @@ export const Agents = () => {
                   </Card.Footer>
                 </div>
               </Card>
-              </div>
             </Col>
           ))}
-          </Slider>
         </Row>
       </Container>
     </>

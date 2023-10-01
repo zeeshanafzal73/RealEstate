@@ -96,10 +96,10 @@ fetch()
                         <div className="price-box d-flex">
                           <span className="price-a">{property.category}</span>
                         </div>
-                        <a href="#" className="link-a">
+                        <Link to={`/SingleProperty/${property.id}`} className="link-a">
                           Click here to view
                           <span className="bi bi-chevron-right"></span>
-                        </a>
+                        </Link>
                       </div>
                       <div className="card-footer-a">
                         <ul className="card-info d-flex justify-content-around">
